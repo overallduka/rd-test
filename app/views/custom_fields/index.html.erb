@@ -1,0 +1,25 @@
+<%= link_to "Novo campo", new_custom_field_path, class: 'btn btn-default', "data-no-turbolink": "true" %>
+<br>
+<br>
+<table class='table table-striped' >
+
+  <tr>
+    <th>Label</th>
+    <th>Tipo</th>
+    <th>Opções</th>
+  </tr>
+  <% @custom_fields.each do |field| %>
+    <tr>
+      <td><%= field.label %></td>
+      <td><%= field.custom_field_type %></td>
+      <td>
+        <ul>
+          <% field.custom_options.each do |option| %>
+            <li><%= option.title %></li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+
+</table>

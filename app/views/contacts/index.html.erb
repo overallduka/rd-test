@@ -1,0 +1,15 @@
+<%= link_to "Novo Contato", new_contact_path, class: 'btn btn-default' %>
+<br>
+<br>
+<table class="table table-striped">
+  <tr>
+    <th>Email</th>
+    <th>Nome</th>
+  </tr>
+  <% @contacts.each do |contact| %>
+    <tr>
+      <td><%= contact.email %></td>
+      <td><%= contact.name %></td>
+    </tr>
+  <% end %>
+</table>

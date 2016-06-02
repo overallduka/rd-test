@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RdTest</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= yield :head %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+  <a class="navbar-brand" href="#">RD Test</a>
+  <ul class="nav navbar-nav">
+    <li class="nav-item <%= 'active' if current_page?(contacts_path) %>">
+      <%= link_to "Contatos", contacts_path, class: "nav-link" %>
+    </li>
+    <li class="nav-item <%= 'active' if current_page?(custom_fields_path) %>">
+      <%= link_to "Campos Personalizados", custom_fields_path, class: "nav-link" %>
+    </li>
+  </ul>
+  <ul class="nav navbar-nav pull-xs-right">
+    <li class="nav-item">
+      <a class="nav-link" href="">Logout</a>
+    </li>
+  </ul>
+</nav>
+<div class="container">
+  <div class="starter-template">
+    <% if flash[:notice] %>
+      <div class="bg-primary">
+         <%= flash[:notice] %>
+       </div> 
+       <br>
+    <% elsif flash[:alert] %>
+      <div class="bg-danger">
+         <%= flash[:alert] %>
+      </div>
+      <br>
+    <% end %>
+    <%= yield %>
+  </div>
+</div>
+
+</body>
+</html>

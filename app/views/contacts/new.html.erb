@@ -1,0 +1,11 @@
+<%= form_for @contact do |f| %>
+  <fieldset class='form-group'>
+    <%= f.label :email, "Email" %>
+    <%= f.email_field :email, class: 'form-control' %>
+  </fieldset>
+  <fieldset class='form-group'>
+    <%= f.label :name, "Nome" %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </fieldset>
+  <%= f.submit "Criar", class: 'btn btn-primary' %>
+<% end %>

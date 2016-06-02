@@ -1,0 +1,37 @@
+<%= content_for :head do %>
+  <%= javascript_include_tag "vendor/angular.min" %>
+  <%= javascript_include_tag "views/custom_fields/new" %>
+<% end %>
+
+<form class='custom-field-form' ng-app="customFieldApp" ng-controller="mainController">
+  <fieldset class="form-group">
+    <label>Nome do campo</label>
+    <input type="text" required class='form-control' ng-model="custom_field.label" placeholder="Tamanho do pé, Cor Favorita" >
+  </fieldset>
+  <fieldset class="form-group">
+    <label>Tipo</label>
+    <select class="form-control" ng-model="custom_field.custom_field_type">
+      <option value="0">Texto</option>
+      <option value="1">Área de texto</option>
+      <option value="2">Caixa de seleção</option>
+    </select>
+  </fieldset>
+  <fieldset ng-hide="custom_field.custom_field_type != 2" class="form-group">
+    <form class="form-inline">
+      <fieldset class="form-group">
+        <label>Nova opção</label>
+        <input type="text" class='form-control' placeholder="Branco, Preto" ng-model="newOption" >
+      </fieldset>
+      <button class="btn btn-info" ng-click="addOption()">Adicionar</button>
+    </form>
+    <br>
+    <h6>Opções</h6>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="option in custom_options">
+      {{ option }} - <button class="btn btn-sm btn-danger pull-xs-right">remover</button>
+      </li>
+    </ul>
+  </fieldset>
+  <br>
+  <input type="submit" value="Criar campo" class="btn btn-primary">
+</form>
