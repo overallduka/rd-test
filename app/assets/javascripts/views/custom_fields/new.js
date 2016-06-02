@@ -15,6 +15,22 @@ var mainController = function($scope, $http){
     combo_box: 2
   };
 
+  $scope.addOption = function(){
+    var option = $scope.newOption;
+    if( optionValid(option) ){
+      $scope.custom_options.push( option );
+      $scope.newOption = "";
+    }
+  };
+
+  $scope.removeOption = function(option){
+    var index = $scope.custom_options.indexOf(option);
+    $scope.custom_options.splice(index, 1);
+  };
+
+  /*
+   * Proteted methods
+   */
   var optionExists = function(option){
     return $scope.custom_options.indexOf( option ) != -1;
   };
@@ -29,16 +45,8 @@ var mainController = function($scope, $http){
     } else {
       return true;
     } 
-  }
-
-  $scope.addOption = function(){
-    var option = $scope.newOption;
-    if( optionValid(option) ){
-      $scope.custom_options.push( option );
-      $scope.newOption = "";
-    }
   };
-   
+
 };
 
 

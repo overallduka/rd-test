@@ -4,6 +4,17 @@
   margin-top: 100px;
 }
 
-.custom-field-form {
-  width:500px;
+.custom-field-wrapper {
+  display: flex;
+  // Webkit
+  display:-webkit-flex;
+
+  .custom-field-form {
+    width:500px;
+  }
+
+  .custom-options-box {
+    width:300px; 
+    margin: 0 0 0 50px;
+  }
 }
