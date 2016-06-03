@@ -1,0 +1,9 @@
+
+pt-BR:
+  errors:
+    models:
+      user:
+        attributes:
+          email:
+            blank: "deve estar preenchido"
+

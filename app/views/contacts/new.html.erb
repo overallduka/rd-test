@@ -1,6 +1,9 @@
 <%= content_for :head do %>
   <%= javascript_include_tag "vendor/angular.min" %>
   <%= javascript_include_tag "views/contacts/new" %>
+  <script type="text/javascript" charset="utf-8">
+    window.custom_fields = <%= @custom_fields %>;
+  </script>
 <% end %>
 <div class="wrapper" ng-app="contactApp" ng-controller="mainController" >
   <form ng-submit="createContact()" >
@@ -12,7 +15,22 @@
       <label>Nome</label>
       <input type="text" ng-model="contact.name" class="form-control">
     </fieldset>
-    <input type="submit" class='btn btn-primary' value="Criar">
+    <fieldset ng-repeat="field in custom_fields" class="form-group">
+      <label>{{ field.label }}</label>
+      <!-- Text type -->
+      <div ng-if="field.custom_field_type === 'text'" >
+        <input type="text" class='form-control' ng-model="custom_field_values[field.label]">
+      </div>
+      <!-- Text Area type -->
+      <div ng-if="field.custom_field_type === 'text_area'" >
+        <textarea class='form-control' ng-model="custom_field_values[field.label]"></textarea>
+      </div>
+      <!-- Combo box type -->
+      <div ng-if="field.custom_field_type === 'combo_box'" >
+        <select ng-options="option.option as option.option for option in field.custom_options" class='form-control' ng-model="custom_field_values[field.label]"></select>
+      </div>
+    </fieldset>
+    <input type="submit" class='btn btn-primary' ng-disabled="loading" value="Criar">
   </form>
 </div>
 
