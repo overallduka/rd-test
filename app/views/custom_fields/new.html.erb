@@ -2,39 +2,40 @@
   <%= javascript_include_tag "vendor/angular.min" %>
   <%= javascript_include_tag "views/custom_fields/new" %>
 <% end %>
-
-<div ng-app="customFieldApp" ng-controller="mainController" class="custom-field-wrapper">
-  <div class='custom-field-form' >
-    <fieldset class="form-group">
-      <label>Nome do campo</label>
-      <input type="text" required class='form-control' ng-model="custom_field.label" placeholder="Tamanho do pé, Cor Favorita" />
-    </fieldset>
-    <fieldset class="form-group">
-      <label>Tipo</label>
-      <select class="form-control" ng-model="custom_field.custom_field_type">
-        <option value="{{ custom_field_types.text }}">Texto</option>
-        <option value="{{ custom_field_types.text_area }}">Área de texto</option>
-        <option value="{{ custom_field_types.combo_box }}">Caixa de seleção</option>
-      </select>
-    </fieldset>
-    <!-- New option form -->
-    <fieldset ng-hide="custom_field.custom_field_type != custom_field_types.combo_box" class="form-group">
-      <form class="form-inline">
-        <fieldset class="form-group">
-          <label>Nova opção</label>
-          <input type="text" class='form-control' placeholder="Branco, Preto" ng-model="newOption" />
-        </fieldset>
-        <button class="btn btn-info-outline" ng-click="addOption()">Adicionar</button>
-      </form>
-    </fieldset>
-    <input type="submit" value="Criar campo" class="btn btn-primary" />
+<div class="wrapper" ng-controller="mainController" ng-app="customFieldApp" >
+  <div class="custom-field-wrapper"  >
+    <div class='custom-field-form' >
+      <fieldset class="form-group">
+        <label>Nome do campo</label>
+        <input type="text" required class='form-control' ng-model="custom_field.label" placeholder="Tamanho do pé, Cor Favorita" />
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Tipo</label>
+        <select required class="form-control" ng-model="custom_field.custom_field_type">
+          <option value="{{ custom_field_types.text }}">Texto</option>
+          <option value="{{ custom_field_types.text_area }}">Área de texto</option>
+          <option value="{{ custom_field_types.combo_box }}">Caixa de seleção</option>
+        </select>
+      </fieldset>
+      <!-- New option form -->
+      <fieldset ng-hide="custom_field.custom_field_type != custom_field_types.combo_box" class="form-group">
+        <form class="form-inline">
+          <fieldset class="form-group">
+            <label>Nova opção</label>
+            <input type="text" class='form-control' placeholder="Branco, Preto" ng-model="newOption" />
+          </fieldset>
+          <button class="btn btn-info-outline" ng-click="addOption()">Adicionar</button>
+        </form>
+      </fieldset>
+    </div>
+    <div ng-hide="custom_field.custom_field_type != custom_field_types.combo_box" class='custom-options-box' >
+      <h6>Opções</h6>
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="option in custom_options">
+        {{ option }} <button ng-click="removeOption(option)" class="btn btn-sm btn-danger-outline pull-xs-right">remover</button>
+        </li>
+      </ul> 
+    </div>
   </div>
-  <div ng-hide="custom_field.custom_field_type != custom_field_types.combo_box" class='custom-options-box' >
-    <h6>Opções</h6>
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="option in custom_options">
-      {{ option }} <button ng-click="removeOption(option)" class="btn btn-sm btn-danger-outline pull-xs-right">remover</button>
-      </li>
-    </ul> 
-  </div>
+  <input ng-click="saveCustomField()" ng-disabled="loading" type="submit" value="Criar campo" class="btn btn-primary" />
 </div>

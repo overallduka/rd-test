@@ -11,11 +11,11 @@
   <% @custom_fields.each do |field| %>
     <tr>
       <td><%= field.label %></td>
-      <td><%= field.custom_field_type %></td>
+      <td><%= field.custom_field_type.humanize %></td>
       <td>
         <ul>
           <% field.custom_options.each do |option| %>
-            <li><%= option.title %></li>
+            <li><%= option.option %></li>
           <% end %>
         </ul>
       </td>
