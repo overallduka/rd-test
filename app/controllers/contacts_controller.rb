@@ -1,11 +1,16 @@
 class ContactsController < ApplicationController
 
+  before_action :authenticate_user!
+
   def index
-    @contacts = Contact.all
+    @contacts = current_user.contacts
   end
 
   def new
-    @contact = Contact.new
+    @custom_fields = current_user
+      .custom_fields
+      .to_json
+      .html_safe
   end
 
   def create

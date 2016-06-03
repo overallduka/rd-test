@@ -1,7 +1,9 @@
 class CustomFieldsController < ApplicationController
 
+  before_action :authenticate_user!
+
   def index
-    @custom_fields = CustomField.all.includes(:custom_options)
+    @custom_fields = current_user.custom_fields.includes(:custom_options)
   end
 
   def new
@@ -9,7 +11,7 @@ class CustomFieldsController < ApplicationController
   end
 
   def create
-    custom_field = CustomField.create(custom_field_params)
+    custom_field = current_user.custom_fields.create(custom_field_params)
     if custom_field.valid?
       create_custom_options(custom_field) if custom_field.combo_box?
       render json: { message: :success }
