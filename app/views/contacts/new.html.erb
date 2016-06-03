@@ -1,11 +1,18 @@
-<%= form_for @contact do |f| %>
-  <fieldset class='form-group'>
-    <%= f.label :email, "Email" %>
-    <%= f.email_field :email, class: 'form-control' %>
-  </fieldset>
-  <fieldset class='form-group'>
-    <%= f.label :name, "Nome" %>
-    <%= f.text_field :name, class: 'form-control' %>
-  </fieldset>
-  <%= f.submit "Criar", class: 'btn btn-primary' %>
+<%= content_for :head do %>
+  <%= javascript_include_tag "vendor/angular.min" %>
+  <%= javascript_include_tag "views/contacts/new" %>
 <% end %>
+<div class="wrapper" ng-app="contactApp" ng-controller="mainController" >
+  <form ng-submit="createContact()" >
+    <fieldset class="form-group">
+      <label>Email</label>
+      <input type="email" ng-model="contact.email" class="form-control">
+    </fieldset>
+    <fieldset class="form-group">
+      <label>Nome</label>
+      <input type="text" ng-model="contact.name" class="form-control">
+    </fieldset>
+    <input type="submit" class='btn btn-primary' value="Criar">
+  </form>
+</div>
+
