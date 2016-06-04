@@ -1,6 +1,6 @@
 # Setup instructions
 
-Run application
+Run application local 
 
 - bundle install
 - rake db:migrate
